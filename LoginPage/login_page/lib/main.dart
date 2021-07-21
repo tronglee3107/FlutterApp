@@ -10,6 +10,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  int _count = 0;
+  bool _hide = true;
   String _email = '';
   final emailController = TextEditingController();
 
@@ -76,7 +78,7 @@ class _MyAppState extends State<MyApp> {
                   TextField(
                     style: TextStyle(color: Colors.black, fontSize: 18),
                     controller: passwordController,
-                    obscureText: true,
+                    obscureText: _hide,
                     onChanged: (value) {
                       setState(() {
                         _password = value;
@@ -89,7 +91,14 @@ class _MyAppState extends State<MyApp> {
                   ),
                   FlatButton(
                     onPressed: () {
-                      print('Press');
+                      this.setState(() {
+                        if (_count % 2 == 0) {
+                          _hide = false;
+                        } else {
+                          _hide = true;
+                        }
+                        _count += 1;
+                      });
                     },
                     child: Text(
                       'Show',
